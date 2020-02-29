@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('students', {
+    queryInterface.createTable('couriers', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,21 +11,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      avatar_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'files', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
+      },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
         unique: true,
-      },
-      age: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      weight: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      height: {
-        type: Sequelize.FLOAT,
         allowNull: false,
       },
       created_at: {
@@ -38,5 +33,5 @@ module.exports = {
       },
     }),
 
-  down: queryInterface => queryInterface.dropTable('users'),
+  down: queryInterface => queryInterface.dropTable('couriers'),
 };
